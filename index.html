@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIMOSA BAKERY — ميموزا بيكري</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAF6F0;
+      --surface: #FFFDF9;
+      --surface-soft: #FCF7EE;
+      --ink: #231914;
+      --muted: #6E5D53;
+      --accent: #B86B28;
+      --accent-soft: #F3E5D5;
+      --border: #E8DEC9;
+      --blossom: #D98A94;
+      --blossom-soft: #F5DCE0;
+      --leaf: #7A8B6F;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 12% 10%, rgba(217, 138, 148, 0.12) 0%, transparent 42%),
+        radial-gradient(circle at 88% 88%, rgba(184, 107, 40, 0.08) 0%, transparent 45%);
+      color: var(--ink);
+      font-family: 'Tajawal', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .en-font {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    /* Floral corner & scene accents */
+    .corner-floral {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.42;
+    }
+
+    .corner-top-left {
+      top: -6px;
+      left: -6px;
+      width: 210px;
+      height: 210px;
+    }
+
+    .corner-top-right {
+      top: -6px;
+      right: -6px;
+      width: 210px;
+      height: 210px;
+      transform: scaleX(-1);
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 20px 20px 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .menu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 10px;
+      box-shadow: 0 10px 30px rgba(35, 25, 20, 0.05);
+    }
+
+    .menu-frame {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0 22px 36px;
+      background: linear-gradient(180deg, rgba(255, 253, 249, 0.98) 0%, rgba(252, 247, 238, 0.92) 100%);
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-branch {
+      width: 96px;
+      height: 40px;
+      margin: 0 auto 8px;
+      display: block;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    h1.brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.4rem, 7vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .brand-ar {
+      margin-top: 6px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    nav.category-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(250, 246, 240, 0.94);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+      border-bottom: 1px solid var(--border);
+      margin: 0 -22px;
+      padding-inline: 16px;
+    }
+
+    nav.category-nav a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    nav.category-nav a:hover {
+      color: var(--ink);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    section.menu-section {
+      margin-top: 38px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .section-header h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 .en-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .section-count {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .menu-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(35, 25, 20, 0.04);
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.15s ease;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background-color: var(--surface-soft);
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .item-name-ar {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .item-name-en {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .item-price {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--accent);
+      white-space: nowrap;
+      background: var(--accent-soft);
+      padding: 5px 13px;
+      border-radius: 999px;
+    }
+
+    /* Soft pastel café & blossom footer vignette matching the warm cream/blush palette */
+    .cafe-vignette {
+      margin-top: 38px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #FBF4EA 0%, #F5E6DC 100%);
+      padding: 14px 14px 6px;
+    }
+
+    .cafe-vignette svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    footer {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 12px 12px 48px;
+      }
+      .menu-frame {
+        padding: 0 14px 28px;
+      }
+      nav.category-nav {
+        margin: 0 -14px;
+      }
+      .corner-top-left,
+      .corner-top-right {
+        width: 135px;
+        height: 135px;
+        opacity: 0.34;
+      }
+      .menu-item {
+        padding: 14px 14px;
+      }
+      .item-name-ar {
+        font-size: 0.96rem;
+      }
+      .item-name-en {
+        font-size: 0.84rem;
+      }
+      .item-price {
+        font-size: 0.86rem;
+        padding: 4px 10px;
+      }
+      .section-header h2 {
+        font-size: 1.35rem;
+      }
+      .section-header h2 .en-title {
+        font-size: 1.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Left Floral Branch -->
+  <svg class="corner-floral corner-top-left" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 195C24 115 76 52 186 14" stroke="#7A8B6F" stroke-width="2" stroke-linecap="round"/>
+    <path d="M36 132C22 122 18 106 28 100C38 106 40 120 36 132Z" fill="#7A8B6F" opacity="0.65"/>
+    <path d="M84 68C74 52 84 38 96 44C100 54 92 64 84 68Z" fill="#7A8B6F" opacity="0.65"/>
+    <path d="M128 38C136 50 150 52 154 42C146 34 134 34 128 38Z" fill="#7A8B6F" opacity="0.65"/>
+    <g fill="#E8A5AE">
+      <circle cx="58" cy="96" r="6"/>
+      <circle cx="67" cy="91" r="6"/>
+      <circle cx="66" cy="101" r="6"/>
+      <circle cx="57" cy="103" r="6"/>
+      <circle cx="114" cy="44" r="5.5"/>
+      <circle cx="122" cy="40" r="5.5"/>
+      <circle cx="121" cy="49" r="5.5"/>
+      <circle cx="28" cy="154" r="5"/>
+      <circle cx="36" cy="150" r="5"/>
+      <circle cx="35" cy="158" r="5"/>
+    </g>
+    <circle cx="62" cy="96" r="2.8" fill="#B86B28"/>
+    <circle cx="118" cy="44" r="2.5" fill="#B86B28"/>
+  </svg>
+
+  <!-- Top Right Floral Branch -->
+  <svg class="corner-floral corner-top-right" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 195C24 115 76 52 186 14" stroke="#7A8B6F" stroke-width="2" stroke-linecap="round"/>
+    <path d="M36 132C22 122 18 106 28 100C38 106 40 120 36 132Z" fill="#7A8B6F" opacity="0.65"/>
+    <path d="M84 68C74 52 84 38 96 44C100 54 92 64 84 68Z" fill="#7A8B6F" opacity="0.65"/>
+    <path d="M128 38C136 50 150 52 154 42C146 34 134 34 128 38Z" fill="#7A8B6F" opacity="0.65"/>
+    <g fill="#E8A5AE">
+      <circle cx="58" cy="96" r="6"/>
+      <circle cx="67" cy="91" r="6"/>
+      <circle cx="66" cy="101" r="6"/>
+      <circle cx="57" cy="103" r="6"/>
+      <circle cx="114" cy="44" r="5.5"/>
+      <circle cx="122" cy="40" r="5.5"/>
+      <circle cx="121" cy="49" r="5.5"/>
+      <circle cx="28" cy="154" r="5"/>
+      <circle cx="36" cy="150" r="5"/>
+      <circle cx="35" cy="158" r="5"/>
+    </g>
+    <circle cx="62" cy="96" r="2.8" fill="#B86B28"/>
+    <circle cx="118" cy="44" r="2.5" fill="#B86B28"/>
+  </svg>
+
+  <div class="container">
+    <div class="menu-card">
+      <div class="menu-frame">
+        <header>
+          <svg class="header-branch" viewBox="0 0 110 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M16 32C36 20 48 16 55 16C62 16 74 20 94 32" stroke="#7A8B6F" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M32 23C27 15 33 10 39 14C40 19 36 22 32 23Z" fill="#7A8B6F" opacity="0.45"/>
+            <path d="M78 23C83 15 77 10 71 14C70 19 74 22 78 23Z" fill="#7A8B6F" opacity="0.45"/>
+            <circle cx="55" cy="12" r="4.5" fill="#E8A5AE"/>
+            <circle cx="49" cy="16" r="4" fill="#D98A94"/>
+            <circle cx="61" cy="16" r="4" fill="#D98A94"/>
+            <circle cx="55" cy="16" r="2" fill="#B86B28"/>
+          </svg>
+          <div class="eyebrow en-font">Artisan Bakery &amp; Coffee • مخبز وقهوة</div>
+          <h1 class="brand en-font">MIMOSA BAKERY</h1>
+          <div class="brand-ar">ميموزا بيكري</div>
+          <p class="subtitle">قهوة محضّرة طازجة ومخبوزات يومية • Freshly brewed coffee &amp; daily baked treats</p>
+        </header>
+
+        <nav class="category-nav" aria-label="Menu Categories">
+          <a href="#coffee">القهوة • <span class="en-font">Coffee</span></a>
+          <a href="#desserts">الحلويات • <span class="en-font">Desserts</span></a>
+        </nav>
+
+        <main>
+          <section id="coffee" class="menu-section">
+            <div class="section-header">
+              <h2>القهوة <span class="en-title en-font">Coffee</span></h2>
+              <span class="section-count">17 صنف • 17 items</span>
+            </div>
+            <div class="menu-list">
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">إسبريسو</span>
+                  <span class="item-name-en en-font">Espresso</span>
+                </div>
+                <span class="item-price en-font">16 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">ألفريدو إسبريسو</span>
+                  <span class="item-name-en en-font">Alfredo Espresso</span>
+                </div>
+                <span class="item-price en-font">18 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">كورتادو</span>
+                  <span class="item-name-en en-font">Cortado</span>
+                </div>
+                <span class="item-price en-font">16 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">لاتيه</span>
+                  <span class="item-name-en en-font">Latte</span>
+                </div>
+                <span class="item-price en-font">22 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">فلات وايت</span>
+                  <span class="item-name-en en-font">Flat White</span>
+                </div>
+                <span class="item-price en-font">21 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">سبانيش</span>
+                  <span class="item-name-en en-font">Spanish</span>
+                </div>
+                <span class="item-price en-font">22 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">في 60</span>
+                  <span class="item-name-en en-font">V60</span>
+                </div>
+                <span class="item-price en-font">22 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">قهوة اليوم</span>
+                  <span class="item-name-en en-font">Coffee Day</span>
+                </div>
+                <span class="item-price en-font">16 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">أمريكانو</span>
+                  <span class="item-name-en en-font">Americano</span>
+                </div>
+                <span class="item-price en-font">18 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">إسبريسو ماكياتو</span>
+                  <span class="item-name-en en-font">Espresso Macchiato</span>
+                </div>
+                <span class="item-price en-font">15 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">كابتشينو</span>
+                  <span class="item-name-en en-font">Cappuccino</span>
+                </div>
+                <span class="item-price en-font">22 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">آيس سبانيش</span>
+                  <span class="item-name-en en-font">Iced Spanish</span>
+                </div>
+                <span class="item-price en-font">25 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">آيس لاتيه</span>
+                  <span class="item-name-en en-font">Iced Latte</span>
+                </div>
+                <span class="item-price en-font">25 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">آيس أمريكانو</span>
+                  <span class="item-name-en en-font">Iced Americano</span>
+                </div>
+                <span class="item-price en-font">19 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">آيس في 60</span>
+                  <span class="item-name-en en-font">Iced V60</span>
+                </div>
+                <span class="item-price en-font">24 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">آيس قهوة اليوم</span>
+                  <span class="item-name-en en-font">Iced Coffee Day</span>
+                </div>
+                <span class="item-price en-font">18 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">إسبريسو جيلاتو</span>
+                  <span class="item-name-en en-font">Espresso Gelato</span>
+                </div>
+                <span class="item-price en-font">29 SAR</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="desserts" class="menu-section">
+            <div class="section-header">
+              <h2>الحلويات <span class="en-title en-font">Desserts</span></h2>
+              <span class="section-count">9 أصناف • 9 items</span>
+            </div>
+            <div class="menu-list">
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">ماريتوتزي جيلاتو</span>
+                  <span class="item-name-en en-font">Maritozzi Gelato</span>
+                </div>
+                <span class="item-price en-font">38 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">تيراميسو</span>
+                  <span class="item-name-en en-font">Tiramisu</span>
+                </div>
+                <span class="item-price en-font">46 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">ميني كرواسون</span>
+                  <span class="item-name-en en-font">Mini Croissants</span>
+                </div>
+                <span class="item-price en-font">20 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">كوكيز الزنجبيل</span>
+                  <span class="item-name-en en-font">Gingerbread Cookies</span>
+                </div>
+                <span class="item-price en-font">28 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">ميسي تشيز كيك</span>
+                  <span class="item-name-en en-font">Messy Cheesecake</span>
+                </div>
+                <span class="item-price en-font">43 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">تشيز كيك التوت البري</span>
+                  <span class="item-name-en en-font">Cranberry Cheesecake</span>
+                </div>
+                <span class="item-price en-font">43 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">بروليه تشيز كيك</span>
+                  <span class="item-name-en en-font">Brûlée Cheesecake</span>
+                </div>
+                <span class="item-price en-font">43 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">سينامون فوكاشيا</span>
+                  <span class="item-name-en en-font">Cinnamon Focaccia</span>
+                </div>
+                <span class="item-price en-font">22 SAR</span>
+              </div>
+
+              <div class="menu-item">
+                <div class="item-info">
+                  <span class="item-name-ar">كيكة الشوكولاتة والبرتقال</span>
+                  <span class="item-name-en en-font">Chocolate Orange Cake</span>
+                </div>
+                <span class="item-price en-font">32 SAR</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Soft pastel café & blossom illustration matching the warm cream/blush tones -->
+          <div class="cafe-vignette" aria-hidden="true">
+            <svg viewBox="0 0 720 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="720" height="150" rx="10" fill="#F8EFE4"/>
+              <path d="M0 112C180 102 540 102 720 112V150H0V112Z" fill="#EFE0D0"/>
+              <!-- Left lamp & terrace wall -->
+              <rect x="34" y="54" width="16" height="58" rx="4" fill="#D8C4B0"/>
+              <path d="M26 54H58L50 34H34L26 54Z" fill="#E8A5AE" opacity="0.75"/>
+              <circle cx="42" cy="46" r="4" fill="#F3E5D5"/>
+              <!-- Center café table & chairs -->
+              <ellipse cx="360" cy="112" rx="42" ry="9" fill="#E5D3C0" stroke="#B89B72" stroke-width="1.5"/>
+              <line x1="360" y1="112" x2="360" y2="136" stroke="#8C6D53" stroke-width="3"/>
+              <ellipse cx="360" cy="136" rx="22" ry="5" fill="#C8B39E"/>
+              <path d="M292 104C292 88 318 88 318 104V132" stroke="#9A7B60" stroke-width="2" stroke-linecap="round"/>
+              <ellipse cx="305" cy="112" rx="14" ry="5" fill="#E5D3C0"/>
+              <path d="M402 104C402 88 428 88 428 104V132" stroke="#9A7B60" stroke-width="2" stroke-linecap="round"/>
+              <ellipse cx="415" cy="112" rx="14" ry="5" fill="#E5D3C0"/>
+              <!-- Right blossom branches -->
+              <path d="M720 18C635 38 565 72 505 112" stroke="#7A8B6F" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M645 36C615 24 585 26 560 36" stroke="#7A8B6F" stroke-width="1.6" stroke-linecap="round"/>
+              <g fill="#E8A5AE" opacity="0.88">
+                <circle cx="675" cy="24" r="6"/>
+                <circle cx="665" cy="30" r="5.5"/>
+                <circle cx="625" cy="30" r="6"/>
+                <circle cx="614" cy="37" r="5"/>
+                <circle cx="585" cy="32" r="5.5"/>
+                <circle cx="555" cy="54" r="6"/>
+                <circle cx="545" cy="62" r="5"/>
+                <circle cx="525" cy="84" r="5.5"/>
+              </g>
+            </svg>
+          </div>
+        </main>
+
+        <footer>
+          <p>MIMOSA BAKERY • ميموزا بيكري • جميع الأسعار بالريال السعودي • All prices in SAR</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
